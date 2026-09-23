@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Bonme Auto | HOMAY TRADING</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+        :root{
+            --bg-main-start:#070f20;
+            --bg-main-end:#121e38;
+            --gold:#d3ad66;
+            --gold-fade:rgba(211,173,102,0.2);
+            --text-white:rgba(255,255,255,0.9);
+            --text-sub:#bbc4d4;
+        }
+        body{
+            font-family:'Noto Serif SC',serif;
+            background: linear-gradient(180deg, var(--bg-main-start), var(--bg-main-end));
+            color:var(--text-white);
+            line-height:1.75;
+        }
+        .container{
+            max-width:1400px;
+            margin:0 auto;
+            padding:0 5%;
+            width:100%;
+        }
+        /* ==========顶部导航栏========== */
+        nav{
+            position:fixed;
+            width:100%;
+            top:0;
+            left:0;
+            z-index:999;
+            background:rgba(7,15,32,0.82);
+            backdrop-filter:blur(8px);
+            border-bottom:1px solid var(--gold-fade);
+            padding:14px 5%;
+        }
+        .nav-inner{
+            max-width:1400px;
+            margin:0 auto;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+        .nav-logo{
+            font-size:1.25rem;
+            color:var(--gold);
+            font-weight:600;
+        }
+        .nav-menu a{
+            color:var(--text-sub);
+            text-decoration:none;
+            margin-left:26px;
+            font-size:0.96rem;
+            transition:0.3s;
+        }
+        .nav-menu a:hover{
+            color:var(--gold);
+        }
+        /* ==========页面间距 ========== */
+        .section-full{
+            width:100%;
+            padding-top:90px;
+            padding-bottom:30px;
+            position:relative;
+        }
+        /* ==========封面 ========== */
+        .hero{
+            width:100%;
+            min-height:100vh;
+            padding-top:70px;
+            background-image: linear-gradient(rgba(4,10,22,0.72), rgba(4,10,22,0.72)), url('./images/cover-bg.jpg');
+            background-size:cover;
+            background-position:center;
+            background-repeat:no-repeat;
+            display:flex;
+            align-items:center;
+        }
+        .hero .container{
+            max-width:1400px;
+            margin:0 auto;
+            padding:0 5%;
+            width:100%;
+        }
+        .hero-content{
+            max-width:780px;
+        }
+        .hero-cn{
+            font-size:3rem;
+            color:var(--gold);
+            letter-spacing:0.32em;
+            margin-bottom:12px;
+            font-weight:600;
+            line-height:1.4;
+        }
+        .hero-en-slogan{
+            font-size:1.15rem;
+            color:var(--gold);
+            opacity:0.85;
+            letter-spacing:0.14em;
+            margin-bottom:36px;
+        }
+        /* ==========【这里就是修改的地方】========== */
+        .hero-cn-desc{
+            font-size:30px;
+            color:rgba(255,255,255,0.8);
+            white-space:nowrap;
+        }
+        /* ======================================= */
+        /* ==========通用标题========== */
+        .section-head{
+            text-align:left;
+            margin-bottom:28px;
+        }
+        .section-head h2{
+            font-size:1.75rem;
+            color:var(--gold);
+            margin-bottom:8px;
+        }
+        .section-head p{
+            color:var(--text-sub);
+            font-size:1.05rem;
+        }
+        /* 关于我们 */
+        .base-row{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:24px;
+        }
+        .base-card{
+            background:rgba(255,255,255,0.04);
+            border:1px solid var(--gold-fade);
+            overflow:hidden;
+            border-radius:8px;
+        }
+        .base-img{
+            height:210px;
+            width:100%;
+            object-fit:cover;
+        }
+        .base-text{
+            padding:20px;
+        }
+        .base-text h4{
+            color:var(--text-white);
+            margin-bottom:8px;
+            font-size:1.1rem;
+        }
+        .base-text p{
+            color:var(--text-sub);
+            font-size:0.95rem;
+        }
+        /* 核心优势 */
+        .adv-row{
+            display:grid;
+            grid-template-columns:repeat(5,1fr);
+            gap:22px;
+        }
+        .adv-card{
+            background:rgba(255,255,255,0.04);
+            border:1px solid var(--gold-fade);
+            border-radius:8px;
+            overflow:hidden;
+        }
+        .adv-body{
+            padding:18px 16px;
+            text-align:center;
+        }
+        .adv-num{
+            color:var(--text-white);
+            font-size:1.3rem;
+            font-weight:700;
+            opacity:0.6;
+            text-align:center;
+        }
+        .adv-body h4{
+            margin:6px 0 10px;
+            font-size:1.15rem;
+            color:var(--text-white);
+            text-align:center;
+        }
+        .adv-body p{
+            font-size:0.9rem;
+            color:var(--text-sub);
+        }
+        .adv-img{
+            height:150px;
+            width:100%;
+            object-fit:cover;
+        }
+        /* 业务支持 */
+        .biz-grid{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:22px;
+            max-width:1200px;
+        }
+        .biz-item{
+            background:rgba(255,255,255,0.04);
+            padding:22px;
+            border-radius:8px;
+            border:1px solid var(--gold-fade);
+        }
+        .biz-item h4{
+            color:var(--text-white);
+            margin-bottom:10px;
+            font-size:1.1rem;
+        }
+        .biz-item p{
+            color:var(--text-sub);
+            font-size:0.95rem;
+        }
+        /* 品控标准 */
+        .qc-row{
+            display:grid;
+            grid-template-columns:repeat(5,1fr);
+            gap:20px;
+        }
+        .qc-card{
+            background:rgba(255,255,255,0.04);
+            overflow:hidden;
+            border:1px solid var(--gold-fade);
+            border-radius:6px;
+        }
+        .qc-img{
+            height:130px;
+            width:100%;
+            object-fit:cover;
+        }
+        .qc-body{
+            padding:16px 14px;
+        }
+        .qc-num{
+            font-size:1.7rem;
+            color:var(--text-white);
+            font-weight:bold;
+        }
+        .qc-card h5{
+            margin:6px 0 8px;
+            font-size:1rem;
+            color:var(--text-white);
+        }
+        .qc-card p{
+            color:var(--text-sub);
+            font-size:0.88rem;
+        }
+        /* 交易保障 */
+        .guarantee-wrap{
+            display:flex;
+            flex-direction:column;
+            gap:24px;
+        }
+        .guarantee-title{
+            color:var(--text-white);
+            font-size:1.25rem;
+            margin-bottom:18px;
+        }
+        .guarantee-grid{
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:18px;
+        }
+        .guarantee-item{
+            background:rgba(255,255,255,0.04);
+            padding:18px;
+            border-radius:6px;
+            border:1px solid var(--gold-fade);
+        }
+        .guarantee-item h4{
+            color:var(--text-white);
+            margin-bottom:10px;
+            font-size:1rem;
+        }
+        .guarantee-item p{
+            color:var(--text-sub);
+            font-size:0.9rem;
+        }
+        /* 车型展示 */
+        .car-grid-new{
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:22px;
+        }
+        .car-grid-used{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:22px;
+        }
+        .car-card{
+            background:rgba(255,255,255,0.04);
+            border-radius:8px;
+            overflow:hidden;
+            border:1px solid var(--gold-fade);
+        }
+        .car-img{
+            height:170px;
+            width:100%;
+            object-fit:cover;
+        }
+        .car-info{
+            padding:16px;
+        }
+        .car-info h5{
+            margin-bottom:5px;
+            font-size:1rem;
+            color:var(--text-white);
+        }
+        .car-info p{
+            color:var(--text-sub);
+            font-size:0.9rem;
+        }
+        /* 服务流程 */
+        .process-row{
+            display:grid;
+            grid-template-columns:repeat(7,1fr);
+            gap:14px;
+        }
+        .process-card{
+            background:rgba(255,255,255,0.04);
+            border:1px solid var(--gold-fade);
+            border-radius:8px;
+            padding:18px 12px;
+        }
+        .process-no{
+            width:42px;
+            height:42px;
+            margin-bottom:10px;
+            background:var(--gold);
+            color:var(--bg-main-start);
+            border-radius:50%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-weight:bold;
+            font-size:1rem;
+        }
+        .process-card h5{
+            font-size:0.95rem;
+            margin-bottom:5px;
+            color:var(--text-white);
+        }
+        .process-card p{
+            color:var(--text-sub);
+            font-size:0.82rem;
+        }
+        /* ==========底部联系我们 ========== */
+        footer{
+            border-top:1px solid var(--gold-fade);
+            padding:60px 5% 30px;
+            background:linear-gradient(180deg, rgba(211,173,102,0.05), transparent);
+        }
+        .footer-inner{
+            max-width:1400px;
+            margin:0 auto;
+        }
+        .footer-brand{
+            text-align:center;
+            margin-bottom:40px;
+        }
+        .footer-brand h3{
+            font-size:1.6rem;
+            color:var(--gold);
+            letter-spacing:0.2em;
+            margin-bottom:8px;
+        }
+        .footer-brand p{
+            color:var(--text-sub);
+            font-size:0.95rem;
+            letter-spacing:0.08em;
+        }
+        .footer-contact{
+            text-align:center;
+            color:var(--text-sub);
+            font-size:1rem;
+            line-height:1.8;
+            margin-bottom:40px;
+        }
+        .copyright{
+            text-align:center;
+            color:#747e90;
+            font-size:0.85rem;
+            padding-top:25px;
+            border-top:1px solid rgba(211,173,102,0.1);
+        }
+        /* 图片透明度 */
+        .base-img,.adv-img,.qc-img,.car-img{
+            opacity:0.7;
+        }
+        /* 响应式 */
+        @media(max-width:1200px){
+            .adv-row,.qc-row,.process-row,.guarantee-grid{
+                grid-template-columns:repeat(3,1fr);
+            }
+        }
+        @media(max-width:768px){
+            .nav-menu{display:none;}
+            .hero-cn{font-size:2rem;letter-spacing:0.2em;}
+            .base-row,.biz-grid,.footer-row,.car-grid-new,.car-grid-used,.adv-row,.qc-row,.process-row,.guarantee-grid{
+                grid-template-columns:1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<!--导航栏 新增联系我们锚点 #contact-->
+<nav>
+    <div class="nav-inner">
+        <div class="nav-logo">Bonme Auto | HOMAY TRADING</div>
+        <div class="nav-menu">
+            <a href="#about">关于我们</a>
+            <a href="#advantage">核心优势</a>
+            <a href="#business">业务支持</a>
+            <a href="#quality">品控标准</a>
+            <a href="#guarantee">交易保障</a>
+            <a href="#cars">车型展示</a>
+            <a href="#process">服务流程</a>
+            <a href="#contact">联系我们</a>
+        </div>
+    </div>
+</nav>
+
+<!--封面-->
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-cn">以诚相融  合启美好</div>
+            <div class="hero-en-slogan">Blended through Sincerity . Unfold Grace Together</div>
+            <div class="hero-cn-desc">Advance SME car dealers toward more opportunities</div>
+        </div>
+    </div>
+</section>
+
+<!--关于我们-->
+<section id="about" class="section-full">
+    <div class="container">
+        <div class="section-head">
+            <h2>关于我们｜ABOUT US</h2>
+            <p style="color:rgba(255,255,255,0.9);">中国‑阿尔及利亚｜双基地 China‑Algeria | Dual‑base Operation</p>
+            <p style="margin-top:10px;max-width:900px;">专注北非市场，助力中小车商赢得更多机会</p>
+            <p style="max-width:900px;">中阿两地联动运营模式，提供新车与精品二手车出口服务</p>
+            <p style="max-width:900px;">阿尔及尔本地团队，实现国内供应链 + 海外本地服务双基地协同</p>
+        </div>
+        <div class="base-row">
+            <div class="base-card">
+                <img class="base-img" alt="上海供应链" src="./images/about-1.jpg">
+                <div class="base-text">
+                    <h4>Shanghai｜美好供应链</h4>
+                    <p>国内车源直采，强大供应链保障</p>
+                </div>
+            </div>
+            <div class="base-card">
+                <img class="base-img" alt="香港HOMAY TRADING" src="./images/about-2.jpg">
+                <div class="base-text">
+                    <h4>HongKong｜HOMAY TRADING</h4>
+                    <p>自由贸易平台，跨境贸易结算</p>
+                </div>
+            </div>
+            <div class="base-card">
+                <img class="base-img" alt="阿尔及尔BONME AUTO" src="./images/about-3.jpg">
+                <div class="base-text">
+                    <h4>Algérie｜BONME AUTO</h4>
+                    <p>本地团队，落地北非市场服务</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--核心优势-->
+<section id="advantage" class="section-full">
+    <div class="container">
+        <div class="section-head">
+            <h2>核心优势｜CORE ADVANTAGES</h2>
+        </div>
+        <div class="adv-row">
+            <div class="adv-card">
+                <div class="adv-body">
+                    <div class="adv-num">01</div>
+                    <h4>线上运营支持</h4>
+                    <p>线上账号搭建，本地线上获客，流量线索分发</p>
+                </div>
+                <img class="adv-img" alt="线上运营支持" src="./images/adv-1.jpg">
+            </div>
+            <div class="adv-card">
+                <div class="adv-body">
+                    <div class="adv-num">02</div>
+                    <h4>车源透明可控</h4>
+                    <p>新车主机厂直出，二手车专业检测</p>
+                </div>
+                <img class="adv-img" alt="车源透明可控" src="./images/adv-2.jpg">
+            </div>
+            <div class="adv-card">
+                <div class="adv-body">
+                    <div class="adv-num">03</div>
+                    <h4>跨境交易保障</h4>
+                    <p>本地主体履约担保，降低跨境风险</p>
+                </div>
+                <img class="adv-img" alt="跨境交易保障" src="./images/adv-3.jpg">
+            </div>
+            <div class="adv-card">
+                <div class="adv-body">
+                    <div class="adv-num">04</div>
+                    <h4>本地团队对接</h4>
+                    <p>熟悉本地政策市场，无时差高效响应</p>
+                </div>
+                <img class="adv-img" alt="本地团队对接" src="./images/adv-4.jpg">
+            </div>
+            <div class="adv-card">
+                <div class="adv-body">
+                    <div class="adv-num">05</div>
+                    <h4>全链路一站式</h4>
+                    <p>车源、质检、报关、海运一体化服务</p>
+                </div>
+                <img class="adv-img" alt="全链路一站式" src="./images/adv-5.jpg">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--业务支持-->
+<section id="business" class="section-full">
+    <div class="container">
+        <div class="section-head">
+            <h2>业务支持｜BUSINESS SUPPORT</h2>
+        </div>
+        <div class="biz-grid">
+            <div class="biz-item">
+                <h4>车型信息供给</h4>
+                <p>车辆实拍图、视频、原厂参数文档，助力本地推广</p>
+            </div>
+            <div class="biz-item">
+                <h4>线下销售助力</h4>
+                <p>展车试驾、解答终端客户咨询，助力成交</p>
+            </div>
+            <div class="biz-item">
+                <h4>灵活采购方案</h4>
+                <p>单台采购、单柜采购，适配不同合作商</p>
+            </div>
+            <div class="biz-item">
+                <h4>线上运营支持</h4>
+                <p>素材模板、账号创建运营指引，拓宽客源</p>
+            </div>
+            <div class="biz-item">
+                <h4>行业交流沙龙</h4>
+                <p>中阿行业交流，共享市场与车型趋势信息</p>
+            </div>
+            <div class="biz-item">
+                <h4>车源信息共享与调配</h4>
+                <p>现车信息互通调配，高效促成订单</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--品控标准-->
+<section id="quality" class="section-full">
+    <div class="container">
+        <div class="section-head">
+            <h2>品控标准｜QUALITY CONTROL</h2>
+            <p>5道环节，108项检测</p>
+        </div>
+        <div class="qc-row">
+            <div class="qc-card">
+                <img class="qc-img" alt="车源遴选" src="./images/qc-1.jpg">
+                <div class="qc-body">
+                    <div class="qc-num">01</div>
+                    <h5>车源遴选</h5>
+                    <p>0公里新车主机厂直供；二手车仅限3‑7万公里精品车源，渠道可溯源</p>
+                </div>
+            </div>
+            <div class="qc-card">
+                <img class="qc-img" alt="实车查验" src="./images/qc-2.jpg">
+                <div class="qc-body">
+                    <div class="qc-num">02</div>
+                    <h5>实车查验</h5>
+                    <p>逐台实车60项外观/内饰/发动机/底盘检测，全程拍照留档</p>
+                </div>
+            </div>
+            <div class="qc-card">
+                <img class="qc-img" alt="专业检测" src="./images/qc-3.jpg">
+                <div class="qc-body">
+                    <div class="qc-num">03</div>
+                    <h5>专业检测</h5>
+                    <p>查博士独立第三方检测，出具国标检测报告</p>
+                </div>
+            </div>
+            <div class="qc-card">
+                <img class="qc-img" alt="事故车排除" src="./images/qc-4.jpg">
+                <div class="qc-body">
+                    <div class="qc-num">04</div>
+                    <h5>事故车排除</h5>
+                    <p>100%排除重大事故/泡水/火烧/调表车，关键项核验定级</p>
+                </div>
+            </div>
+            <div class="qc-card">
+                <img class="qc-img" alt="出库终检" src="./images/qc-5.jpg">
+                <div class="qc-body">
+                    <div class="qc-num">05</div>
+                    <h5>出库终检</h5>
+                    <p>装船前PDI终检，车况报告+单证同步客户确认后发运</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--交易保障-->
+<section id="guarantee" class="section-full">
+    <div class="container">
+        <div class="section-head">
+            <h2>交易保障｜TRANSACTION ASSURANCE</h2>
+            <p>两道保障，前置风控加本地兜底</p>
+        </div>
+        <div class="guarantee-wrap">
+            <div>
+                <h3 class="guarantee-title">第一道保障 · 全流程风险管控</h3>
+                <div class="guarantee-grid">
+                    <div class="guarantee-item">
+                        <h4>车辆质量</h4>
+                        <p>筛选、第三方检测、出库终检层层核验，留存检测档案</p>
+                    </div>
+                    <div class="guarantee-item">
+                        <h4>资金安全</h4>
+                        <p>定金锁车；车辆检测验收完成后尾款发车</p>
+                    </div>
+                    <div class="guarantee-item">
+                        <h4>交付时效</h4>
+                        <p>拆解交付节点，全环节信息同步，异常预警协调</p>
+                    </div>
+                    <div class="guarantee-item">
+                        <h4>单证合规</h4>
+                        <p>预审全套出口文件，统一归档，保障清关</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3 class="guarantee-title">第二道保障 · 本地主体履约兜底</h3>
+                <div class="guarantee-grid">
+                    <div class="guarantee-item">
+                        <h4>重大车况问题</h4>
+                        <p>置换兜底</p>
+                    </div>
+                    <div class="guarantee-item">
+                        <h4>锁车无车</h4>
+                        <p>退款兜底</p>
+                    </div>
+                    <div class="guarantee-item">
+                        <h4>交付延误</h4>
+                        <p>补偿兜底</p>
+                    </div>
+                    <div class="guarantee-item">
+                        <h4>出口报关受阻</h4>
+                        <p>协调兜底</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--车型展示-->
+<section id="cars" class="section-full">
+    <div class="container">
+        <div class="section-head">
+            <h2>车型展示｜VEHICLE SHOWCASE</h2>
+        </div>
+        <h3 style="color:var(--text-white);margin-bottom:18px;font-size:1.25rem;">NEW CARS · 0公里准新车</h3>
+        <div class="car-grid-new">
+            <div class="car-card">
+                <img class="car-img" alt="吉利缤越" src="./images/newcar-1.jpg">
+                <div class="car-info"><h5>吉利缤越</h5><p>1.5T 燃油</p></div>
+            </div>
+            <div class="car-card">
+                <img class="car-img" alt="传祺GS3" src="./images/newcar-2.jpg">
+                <div class="car-info"><h5>传祺GS3</h5><p>1.5T 燃油</p></div>
+            </div>
+            <div class="car-card">
+                <img class="car-img" alt="睿蓝X3" src="./images/newcar-3.jpg">
+                <div class="car-info"><h5>睿蓝 X3</h5><p>纯电</p></div>
+            </div>
+            <div class="car-card">
+                <img class="car-img" alt="长安X5" src="./images/newcar-4.jpg">
+                <div class="car-info"><h5>长安 X5</h5><p>1.5T 燃油</p></div>
+            </div>
+            <div class="car-card">
+                <img class="car-img" alt="名爵5" src="./images/newcar-5.jpg">
+                <div class="car-info"><h5>名爵 5</h5><p>1.5T 燃油</p></div>
+            </div>
+            <div class="car-card">
+                <img class="car-img" alt="捷途X70" src="./images/newcar-6.jpg">
+                <div class="car-info"><h5>捷途 X70</h5><p>1.5T 燃油</p></div>
+            </div>
+            <div class="car-card">
+                <img class="car-img" alt="丰田卡罗拉" src="./images/newcar-7.jpg">
+                <div class="car-info"><h5>丰田卡罗拉</h5><p>1.2T 燃油</p></div>
+            </div>
+            <div class="car-card">
+                <img class="car-img" alt="大众探歌" src="./images/newcar-8.jpg">
+                <div class="car-info"><h5>大众探歌</h5><p>1.4T 燃油</p></div>
+            </div>
+        </div>
+        <h3 style="color:var(--text-white);margin:40px 0 18px;font-size:1.25rem;">USED CARS · 精品二手车</h3>
+        <div class="car-grid-used">
+            <div class="car-card">
+                <img class="car-img" alt="大众探影" src="./images/usedcar-1.jpg">
+                <div class="car-info"><h5>大众探影</h5><p>1.4T 精品二手车</p></div>
+            </div>
+            <div class="car-card">
+                <img class="car-img" alt="大众高尔夫" src="./images/usedcar-2.jpg">
+                <div class="car-info"><h5>大众高尔夫</h5><p>1.4T 精品二手车</p></div>
+            </div>
+            <div class="car-card">
+                <img class="car-img" alt="大众途铠" src="./images/usedcar-3.jpg">
+                <div class="car-info"><h5>大众途铠</h5><p>1.4T 精品二手车</p></div>
+            </div>
+            <div class="car-card">
+                <img class="car-img" alt="大众探歌" src="./images/usedcar-4.jpg">
+                <div class="car-info"><h5>大众探歌</h5><p>1.4T 精品二手车</p></div>
+            </div>
+            <div class="car-card">
+                <img class="car-img" alt="大众途岳" src="./images/usedcar-5.jpg">
+                <div class="car-info"><h5>大众途岳</h5><p>1.4T 精品二手车</p></div>
+            </div>
+            <div class="car-card">
+                <img class="car-img" alt="大众朗逸" src="./images/usedcar-6.jpg">
+                <div class="car-info"><h5>大众朗逸</h5><p>1.4T 精品二手车</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--服务流程-->
+<section id="process" class="section-full">
+    <div class="container">
+        <div class="section-head">
+            <h2>服务流程｜SERVICE PROCESS</h2>
+        </div>
+        <div class="process-row">
+            <div class="process-card">
+                <div class="process-no">01</div>
+                <h5>需求沟通</h5>
+                <p>确认目标车型、数量、预算</p>
+            </div>
+            <div class="process-card">
+                <div class="process-no">02</div>
+                <h5>车源锁定</h5>
+                <p>选定车辆，支付定金锁车</p>
+            </div>
+            <div class="process-card">
+                <div class="process-no">03</div>
+                <h5>第三方检测</h5>
+                <p>出具检测报告，同步给客户</p>
+            </div>
+            <div class="process-card">
+                <div class="process-no">04</div>
+                <h5>尾款支付</h5>
+                <p>核验无误后支付尾款</p>
+            </div>
+            <div class="process-card">
+                <div class="process-no">05</div>
+                <h5>报关单证</h5>
+                <p>全套出口资料准备</p>
+            </div>
+            <div class="process-card">
+                <div class="process-no">06</div>
+                <h5>海运发运</h5>
+                <p>装船出海，同步物流信息</p>
+            </div>
+            <div class="process-card">
+                <div class="process-no">07</div>
+                <h5>本地交付</h5>
+                <p>阿尔及尔清关，完成交付</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--联系我们锚点区域-->
+<section id="contact" class="section-full"></section>
+
+<!--底部联系我们-->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <h3>Bonme Auto | HOMAY TRADING</h3>
+            <p>Blended through Sincerity . Unfold Grace Together</p>
+        </div>
+        <div class="footer-contact">
+            <p>Email: Homayauto@gmail.com | WhatsApp: +213 5585 28487</p>
+            <p>Add: Dely Ibrahim, Alger | 8F Guosheng Center, Putuo Shanghai | 7F, Po Kwan Building, Kwun Tong, Hong Kong</p>
+        </div>
+        <div class="copyright">
+            © 2026 Bonme Auto | HOMAY TRADING All Rights Reserved
+        </div>
+    </div>
+</footer>
+</body>
+</html>
